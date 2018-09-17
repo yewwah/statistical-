@@ -2,6 +2,12 @@
 import scipy.io as sio
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+
+"""
+Preparation of plots 
+"""
+fig, ax = plt.subplots(1)
 
 """
 This portion of the code sets the global parameters of the coe and is not expected to change
@@ -16,6 +22,10 @@ train_final = np.hstack((train, train_labels))
 # Convert to df to binarize
 df = pd.DataFrame(train_final)
 df_binarized = df.applymap(lambda x: 1 if x > 0 else 0)
+
+# Preparation of training data
+# Remove ground truth from training data
+df_train = df_binarized.drop(df_binarized.columns[len(df_binarized.columns) - 1], axis=1)
 
 # Prepare Test Data
 test = load['Xtest']
@@ -70,8 +80,14 @@ def compute_accuracy(grd_truth, y_pred_0, y_pred_1):
     acc = [1 if int(x[0]) == x[1] else 0 for x in pred]
     return sum(acc)/float(len(grd_truth))
 
-alphas = [1]
+"""
+This portion is for the fixed parameters for the table
+"""
+alphas = [1, 10, 100]
 
+"""
+This for loop is copied and pasted below for the full plot
+"""
 for alpha in alphas:
     beta = alpha
     # Compute the probs of x given y
@@ -84,15 +100,16 @@ for alpha in alphas:
     """
     Compute training error
     """
+    grd_truth_train = df_binarized[57]
 
     # Compute probabilites for test data being class 0
-    y_pred_0 = compute_prob_for_class(df_binarized.iloc[:, :57], x_y0, log_p_y0)
+    y_pred_0 = compute_prob_for_class(df_train, x_y0, log_p_y0)
 
     # Compute probabilites for test data being class 1
-    y_pred_1 = compute_prob_for_class(df_binarized.iloc[:, :57], x_y1, log_p_y1)
+    y_pred_1 = compute_prob_for_class(df_train, x_y1, log_p_y1)
 
-    grd_truth_train = df_binarized[57]
-    print compute_accuracy(grd_truth_train, y_pred_0, y_pred_1)
+    training_error = 1.0 - compute_accuracy(grd_truth_train, y_pred_0, y_pred_1)
+    print 'Value of alpha: {0}, Training Error : {1}'.format(alpha, training_error)
 
     """
     Compute test error
@@ -104,4 +121,70 @@ for alpha in alphas:
     # Compute probabilites for test data being class 1
     y_pred_1 = compute_prob_for_class(df_test, x_y1, log_p_y1)
 
-    print compute_accuracy(grd_truth, y_pred_0, y_pred_1)
+    test_error = 1.0 - compute_accuracy(grd_truth, y_pred_0, y_pred_1)
+    print 'Value of alpha: {0}, Test Error : {1}'.format(alpha, test_error)
+
+"""
+For plotting graph 
+"""
+
+alphas = []
+train_errors = []
+test_errors = []
+x = 0
+while x < 100:
+    x = x + 0.5
+    alphas.append(x)
+
+for alpha in alphas:
+    print 'Processing alpha {0}'.format(alpha)
+    beta = alpha
+    # Compute the probs of x given y
+    df_y0 = df_binarized[df_binarized[57] == 0].iloc[:, :57]
+    x_y0 = compute_training_probs(df_y0, alpha, beta)
+
+    df_y1 = df_binarized[df_binarized[57] == 1].iloc[:, :57]
+    x_y1 = compute_training_probs(df_y1, alpha, beta)
+
+    """
+    Compute training error
+    """
+    grd_truth_train = df_binarized[57]
+
+    # Compute probabilites for test data being class 0
+    y_pred_0 = compute_prob_for_class(df_train, x_y0, log_p_y0)
+
+    # Compute probabilites for test data being class 1
+    y_pred_1 = compute_prob_for_class(df_train, x_y1, log_p_y1)
+
+    training_error = 1.0 - compute_accuracy(grd_truth_train, y_pred_0, y_pred_1)
+    train_errors.append(training_error)
+
+    """
+    Compute test error
+    """
+
+    # Compute probabilites for test data being class 0
+    y_pred_0 = compute_prob_for_class(df_test, x_y0, log_p_y0)
+
+    # Compute probabilites for test data being class 1
+    y_pred_1 = compute_prob_for_class(df_test, x_y1, log_p_y1)
+
+    test_error = 1.0 - compute_accuracy(grd_truth, y_pred_0, y_pred_1)
+    test_errors.append(test_error)
+
+# Let x be alphas and y be the test error
+x = alphas
+y_test = test_errors
+y_train = train_errors
+
+ax.plot(x, y_train)
+ax.title.set_text('Alpha against Training Error')
+plt.show()
+plt.savefig('beta-binomial_train.png')
+
+# plot the data
+ax.plot(x, y_test)
+ax.title.set_text('Alpha against Testing Error')
+plt.show()
+plt.savefig('beta-binomial_test.png')
