@@ -75,11 +75,28 @@ alphas = [1]
 for alpha in alphas:
     beta = alpha
     # Compute the probs of x given y
-    df_y0 = df_binarized[df_binarized[57] == 0]
+    df_y0 = df_binarized[df_binarized[57] == 0].iloc[:, :57]
     x_y0 = compute_training_probs(df_y0, alpha, beta)
 
-    df_y1 = df_binarized[df_binarized[57] == 1]
+    df_y1 = df_binarized[df_binarized[57] == 1].iloc[:, :57]
     x_y1 = compute_training_probs(df_y1, alpha, beta)
+
+    """
+    Compute training error
+    """
+
+    # Compute probabilites for test data being class 0
+    y_pred_0 = compute_prob_for_class(df_binarized.iloc[:, :57], x_y0, log_p_y0)
+
+    # Compute probabilites for test data being class 1
+    y_pred_1 = compute_prob_for_class(df_binarized.iloc[:, :57], x_y1, log_p_y1)
+
+    grd_truth_train = df_binarized[57]
+    print compute_accuracy(grd_truth_train, y_pred_0, y_pred_1)
+
+    """
+    Compute test error
+    """
 
     # Compute probabilites for test data being class 0
     y_pred_0 = compute_prob_for_class(df_test, x_y0, log_p_y0)
