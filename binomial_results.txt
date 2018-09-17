@@ -1,0 +1,6 @@
+Value of alpha: 1, Training Error : 0.110277324633
+Value of alpha: 1, Test Error : 0.119791666667
+Value of alpha: 10, Training Error : 0.115497553018
+Value of alpha: 10, Test Error : 0.125
+Value of alpha: 100, Training Error : 0.136704730832
+Value of alpha: 100, Test Error : 0.142578125

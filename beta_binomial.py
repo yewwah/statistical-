@@ -4,10 +4,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-"""
-Preparation of plots 
-"""
-fig, ax = plt.subplots(1)
 
 """
 This portion of the code sets the global parameters of the coe and is not expected to change
@@ -178,13 +174,11 @@ x = alphas
 y_test = test_errors
 y_train = train_errors
 
-ax.plot(x, y_train)
-ax.title.set_text('Alpha against Training Error')
-plt.show()
-plt.savefig('beta-binomial_train.png')
+fig, ax = plt.subplots()
+ax.plot(x, y_train, 'g', label='Train Error')
+ax.plot(x, y_test, 'r', label='Test Error')
+leg = ax.legend()
 
-# plot the data
-ax.plot(x, y_test)
-ax.title.set_text('Alpha against Testing Error')
+plt.title = 'Alpha against Error'
+plt.savefig('beta-binomial.png')
 plt.show()
-plt.savefig('beta-binomial_test.png')
