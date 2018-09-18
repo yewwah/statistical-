@@ -3,19 +3,17 @@ import pandas as pd
 import numpy as np
 from sklearn import preprocessing
 from math import e, sqrt, pi
-import matplotlib.pyplot as plt
 
 
 """
 This portion of the code sets the global parameters of the code and is not expected to change
 """
-std_scaler = preprocessing.StandardScaler()
+
 
 # Preparing training data with Z-Norm
 load = sio.loadmat('D:\Yew Wah\Downloads\spamData.mat')
 train = load['Xtrain']
-scaler = std_scaler.fit(train)
-train = scaler.transform(train)
+train = np.log(train + 0.1)
 
 train_labels = load['ytrain']
 train_final = np.hstack((train, train_labels))
@@ -28,7 +26,7 @@ df_train = df_norm.drop(df_norm.columns[len(df_norm.columns) - 1], axis=1)
 
 # Prepare Test Data
 test = load['Xtest']
-test = scaler.transform(test)
+test = np.log(test + 0.1)
 
 df_test = pd.DataFrame(test)
 
@@ -36,7 +34,7 @@ df_test = pd.DataFrame(test)
 grd_truth = load['ytest'].flatten().tolist()
 
 # Calculating priors
-p_y0 = len(train_labels[train_labels == 0])/ 3056.0
+p_y0 = len(train_labels[train_labels == 0])/3056.0
 p_y1 = 1 - p_y0
 
 # Setting the Log Priors
