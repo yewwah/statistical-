@@ -4,9 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/beta_binomial.py" line="76" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d3dc17f-b219-4a8e-ae62-d7110274a482" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/gaussian_z_normal.py" beforeDir="false" afterPath="$PROJECT_DIR$/gaussian_z_normal.py" afterDir="false" />
-    </list>
+    <list default="true" id="5d3dc17f-b219-4a8e-ae62-d7110274a482" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,24 +21,24 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="3" />
+          <entry key="py" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="3" />
+          <entry key="Python" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dummy" value="9" />
-          <entry key="py" value="3027" />
+          <entry key="dummy" value="16" />
+          <entry key="py" value="3530" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="9" />
-          <entry key="Python" value="3027" />
+          <entry key="PLAIN_TEXT" value="16" />
+          <entry key="Python" value="3530" />
         </counts>
       </usages-collector>
     </session>
@@ -48,10 +46,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/beta_binomial.py">
+        <entry file="file://$PROJECT_DIR$/logistic_z_norm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-714">
-              <caret line="81" column="21" lean-forward="true" selection-start-line="81" selection-start-column="21" selection-end-line="81" selection-end-column="21" />
+            <state relative-caret-position="-161">
+              <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
               <folding>
                 <element signature="e#20#42#0" expanded="true" />
               </folding>
@@ -59,23 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gaussian_z_normal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-42">
-              <caret line="85" column="62" selection-end-line="121" />
-              <folding>
-                <element signature="e#0#22#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/gaussian_log.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
+            <state relative-caret-position="238">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -108,8 +94,9 @@
       <list>
         <option value="$PROJECT_DIR$/beta_binomial.py" />
         <option value="$PROJECT_DIR$/gaussian.py" />
-        <option value="$PROJECT_DIR$/gaussian_z_normal.py" />
         <option value="$PROJECT_DIR$/gaussian_log.py" />
+        <option value="$PROJECT_DIR$/logistic_z_norm.py" />
+        <option value="$PROJECT_DIR$/gaussian_z_normal.py" />
       </list>
     </option>
   </component>
@@ -161,7 +148,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.gaussian_log">
+  <component name="RunManager" selected="Python.logistic_z_norm">
     <configuration name="beta_binomial" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="pattern_recognition" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -225,13 +212,36 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="logistic_z_norm" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="pattern_recognition" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/logistic_z_norm.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.beta_binomial" />
       <item itemvalue="Python.gaussian_z_normal" />
       <item itemvalue="Python.gaussian_log" />
+      <item itemvalue="Python.logistic_z_norm" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.logistic_z_norm" />
         <item itemvalue="Python.gaussian_log" />
         <item itemvalue="Python.gaussian_z_normal" />
         <item itemvalue="Python.beta_binomial" />
@@ -265,7 +275,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.329718" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -278,10 +288,27 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/gaussian_log.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="113" column="66" lean-forward="true" selection-start-line="113" selection-start-column="66" selection-end-line="113" selection-end-column="66" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/beta_binomial.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-714">
-          <caret line="81" column="21" lean-forward="true" selection-start-line="81" selection-start-column="21" selection-end-line="81" selection-end-column="21" />
+        <state relative-caret-position="1717">
+          <caret line="106" column="59" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logistic_z_norm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-161">
+          <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
           <folding>
             <element signature="e#20#42#0" expanded="true" />
           </folding>
@@ -290,18 +317,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gaussian_z_normal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-42">
-          <caret line="85" column="62" selection-end-line="121" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gaussian_log.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
+        <state relative-caret-position="238">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />
           </folding>
