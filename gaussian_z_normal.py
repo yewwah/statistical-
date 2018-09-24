@@ -74,7 +74,8 @@ def compute_prob_for_class(df, mean, var, label_prior):
 def compute_accuracy(grd_truth, y_pred_0, y_pred_1):
     # Assign class 0 or class 1
     final_results = zip(y_pred_0, y_pred_1)
-    final_results = [0 if x[0] >= x[1] else 1 for x in final_results]
+    final_results = [0 if x[0] > x[1] else 1 for x in final_results]
+
 
     pred = zip(grd_truth, final_results)
     acc = [1 if int(x[0]) == x[1] else 0 for x in pred]
