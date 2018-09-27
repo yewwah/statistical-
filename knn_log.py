@@ -34,7 +34,9 @@ test = scaler.transform(test)
 df_test = pd.DataFrame(test)
 
 # Load ground truths
-grd_truth = load['ytrain'].flatten().tolist()
+grd_truth_train = load['ytrain'].flatten()
+grd_truth_test = load['ytest'].flatten()
+
 
 
 def calc_proximity(training_data, test_data):
@@ -49,7 +51,8 @@ def calc_proximity(training_data, test_data):
     return np.array(proximity)
 
 
-def identify_k_nn(k, prox, dim, final):
+def identify_k_nn(k, prox, dim, grd_truth):
+    final = []
     for i in prox:
         res = dict(zip(dim, i))
         sorted_d = sorted(res.items(), key=operator.itemgetter(1))[:k]
@@ -67,9 +70,45 @@ def classify_neighbours(k, idxes, labels):
         return 1
     return 0
 
+def compute_accuracy(grd_truth, pred):
+    # Assign class 0 or class 1
+    pred = zip(grd_truth, pred)
+    acc = [1 if int(x[0]) == x[1] else 0 for x in pred]
+    return sum(acc)/float(len(grd_truth))
 
-prox = calc_proximity(df_train.values, df_test.values)
-dim = range(prox.shape[1])
-final = []
-fin = identify_k_nn(3, prox, dim, final)
-print fin
+lam = 1
+lst_of_k = []
+while lam < 100:
+    if lam < 10:
+        lst_of_k.append(lam)
+        lam += 1
+    else:
+        lst_of_k.append(lam+5)
+        lam += 5
+
+train_errors = []
+prox = calc_proximity(df_train.values, df_train.values)
+dimension = range(prox.shape[0])
+for i in lst_of_k:
+    res_train = identify_k_nn(i, prox, dimension, grd_truth_train)
+    train_errors.append(1.0 - compute_accuracy(grd_truth_train, res_train))
+
+test_errors = []
+proximity = calc_proximity(df_train.values, df_test.values)
+dimension = range(proximity.shape[0])
+for i in lst_of_k:
+    res_test = identify_k_nn(i, proximity, dimension, grd_truth_test)
+    test_errors.append(1.0 - compute_accuracy(grd_truth_test, res_test))
+
+
+x = lst_of_k
+y_test = test_errors
+y_train = train_errors
+fig, ax = plt.subplots()
+ax.plot(x, y_train, 'g', label='Train Error')
+ax.plot(x, y_test, 'r', label='Test Error')
+leg = ax.legend()
+
+plt.title = 'K against Error'
+plt.savefig('knn_log.png')
+plt.show()

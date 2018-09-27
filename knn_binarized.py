@@ -15,8 +15,9 @@ std_scaler = preprocessing.StandardScaler()
 # Preparing training data with Z-Norm
 load = sio.loadmat('D:\Yew Wah\Downloads\spamData.mat')
 train = load['Xtrain']
-scaler = std_scaler.fit(train)
-train = scaler.transform(train)
+df = pd.DataFrame(train)
+df_binarized = df.applymap(lambda x: 1 if x > 0 else 0)
+train = df_binarized.values
 
 train_labels = load['ytrain']
 train_final = np.hstack((train, train_labels))
@@ -29,7 +30,9 @@ df_train = df_norm.drop(df_norm.columns[len(df_norm.columns) - 1], axis=1)
 
 # Prepare Test Data
 test = load['Xtest']
-test = scaler.transform(test)
+df = pd.DataFrame(test)
+df_binarized_test = df.applymap(lambda x: 1 if x > 0 else 0)
+test = df_binarized_test.values
 
 df_test = pd.DataFrame(test)
 
@@ -38,14 +41,13 @@ grd_truth_train = load['ytrain'].flatten()
 grd_truth_test = load['ytest'].flatten()
 
 
-
 def calc_proximity(training_data, test_data):
     proximity = []
     for idx, test_vec in enumerate(test_data):
         test_vec_res = []
         for train_vec in training_data:
             # Check L2 distance
-            test_vec_res.append(scipy.spatial.distance.euclidean(train_vec, test_vec))
+            test_vec_res.append(scipy.spatial.distance.hamming(train_vec, test_vec))
         proximity.append(test_vec_res)
     # Returns a list of list
     return np.array(proximity)
@@ -60,6 +62,7 @@ def identify_k_nn(k, proxim, dim, grd_truth):
         final.append(classify_neighbours(k, arr[:, 0], grd_truth))
     return final
 
+
 def classify_neighbours(k, idxes, labels):
     total = 0
     for idx in idxes:
@@ -69,12 +72,12 @@ def classify_neighbours(k, idxes, labels):
         return 1
     return 0
 
-
 def compute_accuracy(grd_truth, pred):
     # Assign class 0 or class 1
     pred = zip(grd_truth, pred)
     acc = [1 if int(x[0]) == x[1] else 0 for x in pred]
     return sum(acc)/float(len(grd_truth))
+
 
 lam = 1
 lst_of_k = []
@@ -110,5 +113,5 @@ ax.plot(x, y_test, 'r', label='Test Error')
 leg = ax.legend()
 
 plt.title = 'K against Error'
-plt.savefig('knn_z_norm.png')
+plt.savefig('knn_binarized.png')
 plt.show()
