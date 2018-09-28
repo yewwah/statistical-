@@ -10,7 +10,7 @@ This portion of the code sets the global parameters of the coe and is not expect
 """
 
 # Preparing training data
-load = sio.loadmat('D:\Yew Wah\Downloads\spamData.mat')
+load = sio.loadmat('spamData.mat')
 train = load['Xtrain']
 train_labels = load['ytrain']
 train_final = np.hstack((train, train_labels))
@@ -168,6 +168,7 @@ for alpha in alphas:
 
     test_error = 1.0 - compute_accuracy(grd_truth, y_pred_0, y_pred_1)
     test_errors.append(test_error)
+
 
 # Let x be alphas and y be the test error
 x = alphas

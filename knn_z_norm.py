@@ -13,7 +13,7 @@ import operator
 std_scaler = preprocessing.StandardScaler()
 
 # Preparing training data with Z-Norm
-load = sio.loadmat('D:\Yew Wah\Downloads\spamData.mat')
+load = sio.loadmat('spamData.mat')
 train = load['Xtrain']
 scaler = std_scaler.fit(train)
 train = scaler.transform(train)
@@ -88,16 +88,16 @@ while lam < 100:
 
 train_errors = []
 prox = calc_proximity(df_train.values, df_train.values)
-dimension = range(prox.shape[0])
+dimension = range(prox.shape[1])
 for i in lst_of_k:
     res_train = identify_k_nn(i, prox, dimension, grd_truth_train)
     train_errors.append(1.0 - compute_accuracy(grd_truth_train, res_train))
 
 test_errors = []
 proximity = calc_proximity(df_train.values, df_test.values)
-dimension = range(proximity.shape[0])
+dimension = range(proximity.shape[1])
 for i in lst_of_k:
-    res_test = identify_k_nn(i, proximity, dimension, grd_truth_test)
+    res_test = identify_k_nn(i, proximity, dimension, grd_truth_train)
     test_errors.append(1.0 - compute_accuracy(grd_truth_test, res_test))
 
 

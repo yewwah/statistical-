@@ -11,7 +11,7 @@ This portion of the code sets the global parameters of the code and is not expec
 std_scaler = preprocessing.StandardScaler()
 
 # Preparing training data with binarization
-load = sio.loadmat('D:\Yew Wah\Downloads\spamData.mat')
+load = sio.loadmat('spamData.mat')
 train = load['Xtrain']
 df = pd.DataFrame(train)
 df_binarized = df.applymap(lambda x: 1 if x > 0 else 0)

@@ -12,7 +12,7 @@ This portion of the code sets the global parameters of the code and is not expec
 std_scaler = preprocessing.StandardScaler()
 
 # Preparing training data with Z-Norm
-load = sio.loadmat('D:\Yew Wah\Downloads\spamData.mat')
+load = sio.loadmat('spamData.mat')
 train = load['Xtrain']
 scaler = std_scaler.fit(train)
 train = scaler.transform(train)
