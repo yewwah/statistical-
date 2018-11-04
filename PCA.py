@@ -10,10 +10,15 @@ from sklearn.metrics import accuracy_score
 
 
 
-def reduce_dimensions_pca(x_train, y_train):
-    x_train = x_train.reshape(60000, 28*28)
-    mean = np.mean(x_train, axis=0)
-    centered = x_train - mean
+def reduce_dimensions_pca(data):
+    """
+
+    :param data: data to reduce dimension
+    :return: data with reduced dimensions
+    """
+
+    mean = np.mean(data, axis=0)
+    centered = data - mean
 
     cov_mat = cov(centered.T)
     eig_val, eig_vec = eig(cov_mat)
@@ -21,7 +26,13 @@ def reduce_dimensions_pca(x_train, y_train):
 
     # Sort the (eigenvalue, eigenvector) tuples from high to low
     eig_pairs.sort(key=lambda x: x[0], reverse=True)
-    return eig_pairs
+
+    # Checking the eig values
+    eig_val_sorted = np.array([x[0] for x in eig_pairs])
+
+    # Ordering the eig vectors into columns
+    eig_vec_sorted = np.array([x[1] for x in eig_pairs]).T
+    return mean, eig_val_sorted, eig_vec_sorted
 
 if __name__ == "__main__":
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
